@@ -1,0 +1,19 @@
+[package]
+name = "simple-codegen"
+# When releasing to crates.io:
+# - Update CHANGELOG.md.
+# - Update doc URL.
+# - Create "v0.x.x" git tag.
+version = "0.2.0"
+license = "MIT"
+authors = [""]
+description = "Library for generating Rust code"
+documentation = "https://docs.rs/codegen/0.2.0/codegen"
+homepage = "https://github.com/Team-FGB/rs-codegen"
+repository = "https://github.com/Team-FGB/rs-codegen"
+readme = "README.md"
+edition = "2024"
+
+[dependencies]
+delegate = "0.13.4"
+indexmap = "2.10.0"
