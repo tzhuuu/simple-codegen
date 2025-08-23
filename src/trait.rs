@@ -12,7 +12,7 @@ use crate::type_def::TypeDef;
 use crate::visibility::Vis;
 
 /// Defines a [trait](https://doc.rust-lang.org/book/ch10-02-traits.html).
-#[derive(Clone, Debug)]
+#[derive(Clone, PartialEq, Eq, Debug)]
 pub struct Trait {
     type_def: TypeDef,
     parents: Vec<Type>,

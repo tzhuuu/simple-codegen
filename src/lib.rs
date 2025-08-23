@@ -31,6 +31,10 @@ mod bound;
 mod doc;
 mod field;
 mod fields;
+mod files {
+    pub mod file;
+    pub mod library;
+}
 mod formatter;
 mod function;
 mod generic_parameter;
@@ -57,6 +61,8 @@ pub use bound::*;
 pub use r#enum::*;
 pub use field::*;
 pub use fields::*;
+pub use files::file::*;
+pub use files::library::*;
 pub use formatter::*;
 pub use function::*;
 pub use generic_parameter::*;

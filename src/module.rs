@@ -15,7 +15,7 @@ use crate::r#trait::Trait;
 use crate::visibility::Vis;
 
 /// Defines a module.
-#[derive(Clone, Debug)]
+#[derive(Clone, PartialEq, Eq, Debug)]
 pub struct Module {
     /// Module name
     name: String,

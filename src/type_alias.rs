@@ -10,7 +10,7 @@ use crate::visibility::Vis;
 use crate::{Formatter, Type};
 
 /// Defines a [type alias](https://doc.rust-lang.org/reference/items/type-aliases.html).
-#[derive(Clone, Debug)]
+#[derive(Clone, PartialEq, Eq, Debug)]
 pub struct TypeAlias {
     type_def: TypeDef,
     ty: Type,

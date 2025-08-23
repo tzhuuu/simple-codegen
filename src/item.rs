@@ -6,7 +6,7 @@ use crate::r#struct::Struct;
 use crate::r#trait::Trait;
 use crate::r#type_alias::TypeAlias;
 
-#[derive(Clone, Debug)]
+#[derive(Clone, PartialEq, Eq, Debug)]
 pub enum Item {
     Module(Module),
     Struct(Struct),

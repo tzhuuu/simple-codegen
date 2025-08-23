@@ -11,7 +11,7 @@ use crate::variant::Variant;
 use crate::visibility::Vis;
 
 /// Defines an [enum](https://doc.rust-lang.org/rust-by-example/custom_types/enum.html).
-#[derive(Clone, Debug)]
+#[derive(Clone, PartialEq, Eq, Debug)]
 pub struct Enum {
     type_def: TypeDef,
     variants: Vec<Variant>,

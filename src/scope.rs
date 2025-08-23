@@ -18,7 +18,7 @@ use crate::type_alias::TypeAlias;
 /// Defines a scope.
 ///
 /// A scope contains modules, types, etc...
-#[derive(Clone, Debug)]
+#[derive(Clone, PartialEq, Eq, Debug)]
 pub struct Scope {
     /// Scope documentation
     doc: Option<Doc>,

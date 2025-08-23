@@ -17,6 +17,12 @@ pub enum Fields {
     Named(Vec<Field>),
 }
 
+impl Default for Fields {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Fields {
     /// Creates an empty set of fields.
     pub fn new() -> Self {

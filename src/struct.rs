@@ -12,7 +12,7 @@ use crate::type_def::TypeDef;
 use crate::visibility::Vis;
 
 /// Defines a struct.
-#[derive(Clone, Debug)]
+#[derive(Clone, PartialEq, Eq, Debug)]
 pub struct Struct {
     type_def: TypeDef,
 

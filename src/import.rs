@@ -1,7 +1,7 @@
 use crate::visibility::Vis;
 
 /// Defines an import (`use` statement).
-#[derive(Clone, Debug)]
+#[derive(Clone, PartialEq, Eq, Debug)]
 pub struct Import {
     #[allow(dead_code)]
     line: String,
