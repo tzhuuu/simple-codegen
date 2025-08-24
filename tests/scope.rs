@@ -19,7 +19,9 @@ fn scope_with_doc() {
 #[test]
 fn scope_with_imports() {
     let mut scope = Scope::new();
-    scope.push_import("bar", "Bar").push_import("baz", "Baz");
+    scope
+        .push_import("bar", "Bar", Vis::Private)
+        .push_import("baz", "Baz", Vis::Private);
 
     let expect = r#"
 use bar::Bar;
@@ -33,9 +35,9 @@ use baz::Baz;
 fn scope_with_repeated_import_paths() {
     let mut scope = Scope::new();
     scope
-        .push_import("bar", "Bar")
-        .push_import("bar", "Bar2")
-        .push_import("baz", "Baz");
+        .push_import("bar", "Bar", Vis::Private)
+        .push_import("bar", "Bar2", Vis::Private)
+        .push_import("baz", "Baz", Vis::Private);
 
     let expect = r#"
 use bar::{Bar, Bar2};
@@ -49,10 +51,10 @@ use baz::Baz;
 fn scope_with_overlapping_import_paths() {
     let mut scope = Scope::new();
     scope
-        .push_import("bar", "Bar")
-        .push_import("bar", "Bar2")
-        .push_import("bar::inner", "Bar3")
-        .push_import("baz", "Baz");
+        .push_import("bar", "Bar", Vis::Private)
+        .push_import("bar", "Bar2", Vis::Private)
+        .push_import("bar::inner", "Bar3", Vis::Private)
+        .push_import("baz", "Baz", Vis::Private);
 
     let expect = r#"
 use bar::{Bar, Bar2};
@@ -79,7 +81,9 @@ fn get_or_new_module() {
     let mut scope = Scope::new();
     assert!(scope.get_module("foo").is_none());
 
-    scope.get_or_new_module("foo").push_import("bar", "Bar");
+    scope
+        .get_or_new_module("foo")
+        .push_import("bar", "Bar", Vis::Private);
 
     scope
         .get_or_new_module("foo")
@@ -101,7 +105,7 @@ mod foo {
 #[test]
 fn module_mut() {
     let mut scope = Scope::new();
-    scope.new_module("foo").push_import("bar", "Bar");
+    scope.new_module("foo").push_import("bar", "Bar", Vis::Pub);
 
     scope
         .get_module_mut("foo")
@@ -111,7 +115,7 @@ fn module_mut() {
 
     let expect = r#"
 mod foo {
-    use bar::Bar;
+    pub use bar::Bar;
 
     struct Foo {
         bar: Bar,

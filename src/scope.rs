@@ -14,6 +14,7 @@ use crate::r#struct::Struct;
 use crate::r#trait::Trait;
 use crate::r#type::Type;
 use crate::type_alias::TypeAlias;
+use crate::visibility::Vis;
 
 /// Defines a scope.
 ///
@@ -119,7 +120,12 @@ impl Scope {
     ///
     /// This results in a new `use` statement being added to the beginning of
     /// the scope.
-    pub fn push_import(&mut self, path: impl Into<String>, ty: impl Into<String>) -> &mut Self {
+    pub fn push_import(
+        &mut self,
+        path: impl Into<String>,
+        ty: impl Into<String>,
+        vis: impl Into<Vis>,
+    ) -> &mut Self {
         // handle cases where the caller wants to refer to a type namespaced
         // within the containing namespace, like "a::B".
         let ty = ty.into();
@@ -130,7 +136,7 @@ impl Scope {
             .entry(path.clone())
             .or_default()
             .entry(ty.to_string())
-            .or_insert_with(|| Import::new(path, ty));
+            .or_insert_with(|| Import::new(path, ty).with_vis(vis));
         self
     }
 
@@ -138,8 +144,13 @@ impl Scope {
     ///
     /// This results in a new `use` statement being added to the beginning of
     /// the scope.
-    pub fn with_import(mut self, path: impl Into<String>, ty: impl Into<String>) -> Self {
-        self.push_import(path, ty);
+    pub fn with_import(
+        mut self,
+        path: impl Into<String>,
+        ty: impl Into<String>,
+        vis: impl Into<Vis>,
+    ) -> Self {
+        self.push_import(path, ty, vis);
         self
     }
 

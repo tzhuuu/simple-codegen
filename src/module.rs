@@ -173,19 +173,29 @@ impl Module {
 
     /// Import a type into the module's scope.
     ///
-    /// This results in a new `use` statement bein added to the beginning of the
+    /// This results in a new `use` statement being added to the beginning of the
     /// module.
-    pub fn push_import(&mut self, path: impl Into<String>, ty: impl Into<String>) -> &mut Self {
-        self.scope.push_import(path, ty);
+    pub fn push_import(
+        &mut self,
+        path: impl Into<String>,
+        ty: impl Into<String>,
+        vis: impl Into<Vis>,
+    ) -> &mut Self {
+        self.scope.push_import(path, ty, vis);
         self
     }
 
     /// Import a type into the module's scope.
     ///
-    /// This results in a new `use` statement bein added to the beginning of the
+    /// This results in a new `use` statement being added to the beginning of the
     /// module.
-    pub fn with_import(mut self, path: impl Into<String>, ty: impl Into<String>) -> Self {
-        self.push_import(path, ty);
+    pub fn with_import(
+        mut self,
+        path: impl Into<String>,
+        ty: impl Into<String>,
+        vis: impl Into<Vis>,
+    ) -> Self {
+        self.push_import(path, ty, vis);
         self
     }
 

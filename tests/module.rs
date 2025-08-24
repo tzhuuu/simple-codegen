@@ -32,8 +32,8 @@ fn module_with_imports() {
     let mut scope = Scope::new();
     scope
         .new_module("foo")
-        .push_import("bar", "Bar")
-        .push_import("baz", "Baz");
+        .push_import("bar", "Bar", Vis::Private)
+        .push_import("baz", "Baz", Vis::Private);
 
     let expect = r#"
 mod foo {
@@ -50,9 +50,9 @@ fn module_with_repeated_import_paths() {
     let mut scope = Scope::new();
     scope
         .new_module("foo")
-        .push_import("bar", "Bar")
-        .push_import("bar", "Bar2")
-        .push_import("baz", "Baz");
+        .push_import("bar", "Bar", Vis::Private)
+        .push_import("bar", "Bar2", Vis::Private)
+        .push_import("baz", "Baz", Vis::Private);
 
     let expect = r#"
 mod foo {
@@ -69,10 +69,10 @@ fn module_with_overlapping_import_paths() {
     let mut scope = Scope::new();
     scope
         .new_module("foo")
-        .push_import("bar", "Bar")
-        .push_import("bar", "Bar2")
-        .push_import("bar::inner", "Bar3")
-        .push_import("baz", "Baz");
+        .push_import("bar", "Bar", Vis::Private)
+        .push_import("bar", "Bar2", Vis::Private)
+        .push_import("bar::inner", "Bar3", Vis::Private)
+        .push_import("baz", "Baz", Vis::Private);
 
     let expect = r#"
 mod foo {
@@ -103,9 +103,9 @@ fn scoped_imports() {
     let mut scope = Scope::new();
     scope
         .new_module("foo")
-        .push_import("bar", "Bar")
-        .push_import("bar", "baz::Baz")
-        .push_import("bar::quux", "quuux::Quuuux")
+        .push_import("bar", "Bar", Vis::Private)
+        .push_import("bar", "baz::Baz", Vis::Private)
+        .push_import("bar::quux", "quuux::Quuuux", Vis::Private)
         .new_struct("Foo")
         .push_named_field(Field::new("bar", "Bar"))
         .push_named_field(Field::new("baz", "baz::Baz"))
