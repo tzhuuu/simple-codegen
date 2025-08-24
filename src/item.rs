@@ -1,6 +1,7 @@
 use crate::r#enum::Enum;
 use crate::function::Function;
 use crate::r#impl::Impl;
+use crate::line_break::LineBreak;
 use crate::module::Module;
 use crate::r#struct::Struct;
 use crate::r#trait::Trait;
@@ -16,6 +17,7 @@ pub enum Item {
     Impl(Impl),
     Raw(String),
     TypeAlias(TypeAlias),
+    LineBreak(LineBreak),
 }
 
 impl From<Module> for Item {
@@ -63,5 +65,11 @@ impl From<String> for Item {
 impl From<TypeAlias> for Item {
     fn from(value: TypeAlias) -> Self {
         Item::TypeAlias(value)
+    }
+}
+
+impl From<LineBreak> for Item {
+    fn from(value: LineBreak) -> Self {
+        Item::LineBreak(value)
     }
 }

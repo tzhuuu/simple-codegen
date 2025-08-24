@@ -9,6 +9,7 @@ use crate::function::Function;
 use crate::r#impl::Impl;
 use crate::import::Import;
 use crate::item::Item;
+use crate::line_break::LineBreak;
 use crate::module::Module;
 use crate::r#struct::Struct;
 use crate::r#trait::Trait;
@@ -367,6 +368,12 @@ impl Scope {
         self
     }
 
+    /// Pushes a `LineBreak`.
+    pub fn push_line_break(&mut self) -> &mut Self {
+        self.items.push(Item::LineBreak(LineBreak::new()));
+        self
+    }
+
     /// Formats the scope using the given formatter.
     pub fn fmt(&self, fmt: &mut Formatter<'_>) -> fmt::Result {
         if let Some(ref doc) = self.doc {
@@ -395,6 +402,7 @@ impl Scope {
                     writeln!(fmt, "{}", v)?;
                 }
                 Item::TypeAlias(ref v) => v.fmt(fmt)?,
+                Item::LineBreak(ref v) => v.fmt(fmt)?,
             }
         }
 

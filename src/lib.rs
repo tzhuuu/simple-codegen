@@ -36,6 +36,7 @@ mod function;
 mod generic_parameter;
 mod import;
 mod item;
+mod line_break;
 mod lint;
 mod module;
 mod scope;

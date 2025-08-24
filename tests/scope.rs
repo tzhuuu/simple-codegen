@@ -77,6 +77,21 @@ fn scope_with_repeated_new_module() {
 }
 
 #[test]
+fn scope_with_modules_and_one_line_break() {
+    let mut scope = Scope::new();
+    scope.new_module("foo");
+    scope.push_line_break();
+    scope.new_module("bar");
+
+    let expect = r#"
+mod foo;
+
+mod bar;"#;
+
+    assert_eq!(scope.to_string(), expect.trim_start());
+}
+
+#[test]
 fn get_or_new_module() {
     let mut scope = Scope::new();
     assert!(scope.get_module("foo").is_none());
