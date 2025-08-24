@@ -4,10 +4,11 @@ use simple_codegen::*;
 fn empty_module() {
     let mut scope = Scope::new();
     scope.new_module("foo");
+    scope.new_module("bar");
 
     let expect = r#"
-mod foo {
-}"#;
+mod foo;
+mod bar;"#;
 
     assert_eq!(scope.to_string(), expect.trim_start());
 }
@@ -21,8 +22,7 @@ fn module_basic() {
         .set_vis(Vis::Pub);
     let expect = r#"
 /// This is a test module.
-pub mod foo {
-}"#;
+pub mod foo;"#;
 
     assert_eq!(scope.to_string(), expect.trim_start());
 }
@@ -92,8 +92,7 @@ fn module_with_attributes() {
 
     let expect = r#"
 #[cfg(test)] 
-mod foo {
-}"#;
+mod foo;"#;
 
     assert_eq!(scope.to_string(), expect.trim_start());
 }

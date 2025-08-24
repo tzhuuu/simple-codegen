@@ -399,6 +399,12 @@ impl Module {
         self.vis.fmt(fmt)?;
 
         write!(fmt, "mod {}", self.name)?;
-        fmt.block(|fmt| self.scope.fmt(fmt))
+        if self.scope.items().is_empty() && self.scope.imports().is_empty() {
+            write!(fmt, ";")?;
+        } else {
+            fmt.block(|fmt| self.scope.fmt(fmt))?;
+        }
+
+        Ok(())
     }
 }
