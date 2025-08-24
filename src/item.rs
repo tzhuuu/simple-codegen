@@ -7,16 +7,26 @@ use crate::r#struct::Struct;
 use crate::r#trait::Trait;
 use crate::r#type_alias::TypeAlias;
 
+/// An `Item` is a single item in a `Scope`.
 #[derive(Clone, PartialEq, Eq, Debug)]
 pub enum Item {
+    /// A module.
     Module(Module),
+    /// A struct.
     Struct(Struct),
+    /// A function.
     Function(Function),
+    /// A trait.
     Trait(Trait),
+    /// An enum.
     Enum(Enum),
+    /// An implementation.
     Impl(Impl),
+    /// A raw string.
     Raw(String),
+    /// A type alias.
     TypeAlias(TypeAlias),
+    /// A line break.
     LineBreak(LineBreak),
 }
 
