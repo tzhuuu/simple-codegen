@@ -63,6 +63,7 @@ pub use function::*;
 pub use generic_parameter::*;
 pub use r#impl::*;
 pub use import::*;
+pub use item::*;
 pub use lint::*;
 pub use module::*;
 pub use scope::*;
