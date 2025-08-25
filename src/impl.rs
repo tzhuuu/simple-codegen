@@ -229,10 +229,7 @@ impl Impl {
     }
 
     /// Pushes an associated type.
-    pub fn with_associated_type(
-        &mut self,
-        associated_type: impl Into<AssociatedType>,
-    ) -> &mut Self {
+    pub fn with_associated_type(mut self, associated_type: impl Into<AssociatedType>) -> Self {
         self.push_associated_type(associated_type);
         self
     }

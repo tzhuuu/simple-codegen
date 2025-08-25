@@ -29,6 +29,14 @@ impl AssociatedType {
         }
     }
 
+    /// Creates a new associated type with the provided name and concrete type.
+    pub fn new_with_concrete_ty(name: impl Into<String>, concrete_ty: impl Into<String>) -> Self {
+        Self {
+            ty: Bound::new(name, Vec::<String>::new()),
+            concrete_ty: Some((concrete_ty.into(), Vec::<String>::new())),
+        }
+    }
+
     /// Gets the name of the associated type.
     pub fn name(&self) -> &str {
         self.ty.name()
